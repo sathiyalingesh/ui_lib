@@ -9,6 +9,8 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+
+
     }
 }
 plugins {
@@ -23,5 +25,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "My Application"
-include(":app")
+include(":uiLibrary")
  

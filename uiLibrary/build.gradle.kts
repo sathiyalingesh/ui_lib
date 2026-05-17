@@ -1,10 +1,13 @@
 plugins {
-    alias(libs.plugins.android.application)
+    id("com.android.library")
+    `maven-publish`
+    signing
     alias(libs.plugins.kotlin.compose)
+    id("com.vanniktech.maven.publish") version "0.36.0"
 }
 
 android {
-    namespace = "com.learnwithsatty.ui_lib"
+    namespace = "io.github.sathiyalingesh.uilib"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
@@ -12,11 +15,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.learnwithsatty.ui_lib"
         minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,4 +54,38 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+
+    signAllPublications()
+
+    coordinates(group.toString(), "ui_lib_v1", version.toString())
+
+    pom {
+        name = "UI Library"
+        description = "A Kotlin UI library for Android."
+        inceptionYear = "2026"
+        url = "https://github.com/sathiyalingesh/ui_lib.git"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "sathiyalingesh"
+                name = "Sathiya Lingesh"
+                url = "https://github.com/sathiyalingesh/"
+            }
+        }
+        scm {
+            url = "https://github.com/sathiyalingesh/ui_lib.git"
+            connection = "scm:git:git://github.com/sathiyalingesh/ui_lib.git"
+            developerConnection = "scm:git:ssh://git@github.com/sathiyalingesh/ui_lib.git"
+        }
+    }
 }
